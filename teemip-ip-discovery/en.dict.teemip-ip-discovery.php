@@ -166,7 +166,10 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Menu:IPDiscovery:IPv6Lookup' => 'IPv6 Address with DNS entry',
 	'Menu:IPDiscovery:IPv4DiscoveredSubnets' => 'IPv4 subnets linked to an IP discovery application',
 	'Menu:IPDiscovery:IPv6DiscoveredSubnets' => 'IPv6 subnets linked to an IP discovery application',
-	
+
 	'UI:IPDiscovery:Action:New:UUIDCollision' => 'UUIDs must be unique across TeemIp!',
-	'UI:IPDiscovery:Action:New:ScanWithNoPort' => 'A port number must be specified when the Scan function is enabled!'
+	'UI:IPDiscovery:Action:New:ScanWithNoPort' => 'A port number must be specified when the Scan function is enabled!',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPSubnet' => 'Explode IPs\' discovered FQDN',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPRange' => 'Explode IPs\' discovered FQDN',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPAddress' => 'Explode discovered FQDN',
 ));
