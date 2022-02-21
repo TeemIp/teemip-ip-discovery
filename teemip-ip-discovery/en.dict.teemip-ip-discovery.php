@@ -21,6 +21,10 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Class:IPDiscovery/Attribute:last_discovery_date+' => 'Date when the discovery run last',
 	'Class:IPDiscovery/Attribute:duration' => 'Duration',
 	'Class:IPDiscovery/Attribute:duration+' => 'Time it took for the last discovery to run',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled' => 'DHCP ranges discovery enabled',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled+' => '',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled/Value:yes' => 'Yes',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled/Value:no' => 'No',
 	'Class:IPDiscovery/Attribute:ping_enabled' => 'Ping enabled',
 	'Class:IPDiscovery/Attribute:ping_enabled+' => '',
 	'Class:IPDiscovery/Attribute:ping_enabled/Value:yes' => 'Yes',
@@ -75,6 +79,8 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Class:IPSubnet/Attribute:ipdiscovery_enabled/Value:no' => 'No',
 	'Class:IPSubnet/Attribute:last_discovery_date' => 'Last discovery date',
 	'Class:IPSubnet/Attribute:last_discovery_date+' => 'Date when the subnet has been discovered last',
+	'Class:IPSubnet/Attribute:ipdiscovery_dhcp_range_discovery_enabled' => 'IP discovery DHCP ranges discovery enabled',
+	'Class:IPSubnet/Attribute:ipdiscovery_dhcp_range_discovery_enabled+' => '',
 	'Class:IPSubnet/Attribute:ipdiscovery_ping_enabled' => 'IP discovery ping enabled',
 	'Class:IPSubnet/Attribute:ipdiscovery_ping_enabled+' => '',
 	'Class:IPSubnet/Attribute:ipdiscovery_iplookup_enabled' => 'IP discovery IP lookup enabled',
@@ -83,8 +89,10 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Class:IPSubnet/Attribute:ipdiscovery_scan_enabled+' => '',
 	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled' => 'IP discovery considers scan "connection refused" as valid',
 	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled+' => '',
-	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled/Value:yes' => 'Yes',
-	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled/Value:no' => 'No',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled' => 'DHCP ranges discovery enabled for subnet',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled+' => '',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled/Value:yes' => 'Yes',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled/Value:no' => 'No',
 	'Class:IPSubnet/Attribute:ping_enabled' => 'Ping enabled for subnet',
 	'Class:IPSubnet/Attribute:ping_enabled+' => '',
 	'Class:IPSubnet/Attribute:ping_enabled/Value:yes' => 'Yes',
@@ -147,6 +155,14 @@ Dict::Add('EN US', 'English', 'English', array(
 ));
 
 //
+// Class: IPv4Address
+//
+
+Dict::Add('EN US', 'English', 'English', array(
+	'Class:IPv4Address/Attribute:ipdiscovery_name' => 'IP Discovery application',
+));
+
+//
 // Application Menu
 //
 
@@ -166,10 +182,11 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Menu:IPDiscovery:IPv6Lookup' => 'IPv6 Address with DNS entry',
 	'Menu:IPDiscovery:IPv4DiscoveredSubnets' => 'IPv4 subnets linked to an IP discovery application',
 	'Menu:IPDiscovery:IPv6DiscoveredSubnets' => 'IPv6 subnets linked to an IP discovery application',
-
 	'UI:IPDiscovery:Action:New:UUIDCollision' => 'UUIDs must be unique across TeemIp!',
 	'UI:IPDiscovery:Action:New:ScanWithNoPort' => 'A port number must be specified when the Scan function is enabled!',
-	'UI:IPDiscovery:Action:ExplodeFQDN:IPSubnet' => 'Explode IPs\' discovered FQDN',
-	'UI:IPDiscovery:Action:ExplodeFQDN:IPRange' => 'Explode IPs\' discovered FQDN',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv4Subnet' => 'Explode IPs\' discovered FQDN',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv6Subnet' => 'Explode IPs\' discovered FQDN',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv4Range' => 'Explode IPs\' discovered FQDN',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv6Range' => 'Explode IPs\' discovered FQDN',
 	'UI:IPDiscovery:Action:ExplodeFQDN:IPAddress' => 'Explode discovered FQDN',
 ));

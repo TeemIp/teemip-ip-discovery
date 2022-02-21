@@ -21,6 +21,10 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Class:IPDiscovery/Attribute:last_discovery_date+' => 'Date à laquelle la découverte a été efectuée pour la dernière fois',
 	'Class:IPDiscovery/Attribute:duration' => 'Durée',
 	'Class:IPDiscovery/Attribute:duration+' => 'Temps qu\'il a fallu pour la découverte',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled' => 'Découverte des plages DHCP activée',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled+' => '',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled/Value:yes' => 'Oui',
+	'Class:IPDiscovery/Attribute:dhcp_range_discovery_enabled/Value:no' => 'Non',
 	'Class:IPDiscovery/Attribute:ping_enabled' => 'Ping activé',
 	'Class:IPDiscovery/Attribute:ping_enabled+' => '',
 	'Class:IPDiscovery/Attribute:ping_enabled/Value:yes' => 'Oui',
@@ -75,6 +79,8 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Class:IPSubnet/Attribute:ipdiscovery_enabled/Value:no' => 'Non',
 	'Class:IPSubnet/Attribute:last_discovery_date' => 'Date de dernière découverte',
 	'Class:IPSubnet/Attribute:last_discovery_date+' => 'Date à laquelle le subnet a été découvert pour la dernière fois',
+	'Class:IPSubnet/Attribute:ipdiscovery_dhcp_range_discovery_enabled' => 'Découverte des plages DHCP activée par l\'application',
+	'Class:IPSubnet/Attribute:ipdiscovery_dhcp_range_discovery_enabled+' => '',
 	'Class:IPSubnet/Attribute:ipdiscovery_ping_enabled' => 'Ping activé par l\'application',
 	'Class:IPSubnet/Attribute:ipdiscovery_ping_enabled+' => '',
 	'Class:IPSubnet/Attribute:ipdiscovery_iplookup_enabled' => 'IP lookup activé par l\'application',
@@ -83,8 +89,10 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Class:IPSubnet/Attribute:ipdiscovery_scan_enabled+' => '',
 	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled' => 'L\'application considère les scan "connexion refusée" comme valides',
 	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled+' => '',
-	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled/Value:yes' => 'Oui',
-	'Class:IPSubnet/Attribute:ipdiscovery_scan_cnx_refused_enabled/Value:no' => 'Non',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled' => 'Découverte des plages DHCP activée pour le sous-réseau',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled+' => '',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled/Value:yes' => 'Oui',
+	'Class:IPSubnet/Attribute:dhcp_range_discovery_enabled/Value:no' => 'Non',
 	'Class:IPSubnet/Attribute:ping_enabled' => 'Ping activé pour le sous-réseau',
 	'Class:IPSubnet/Attribute:ping_enabled+' => '',
 	'Class:IPSubnet/Attribute:ping_enabled/Value:yes' => 'Oui',
@@ -147,6 +155,14 @@ Dict::Add('FR FR', 'French', 'Français', array(
 ));
 
 //
+// Class: IPv4Address
+//
+
+Dict::Add('FR FR', 'French', 'Français', array(
+	'Class:IPv4Address/Attribute:ipdiscovery_name' => 'Application de découverte IPs',
+));
+
+//
 // Application Menu
 //
 
@@ -166,7 +182,11 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Menu:IPDiscovery:IPv6Lookup' => 'Addresses IPv6 avec une entrée DNS',
 	'Menu:IPDiscovery:IPv4DiscoveredSubnets' => 'Sous-réseaux IPv4 liés à un application de découverte IPs',
 	'Menu:IPDiscovery:IPv6DiscoveredSubnets' => 'Sous-réseaux IPv6 liés à un application de découverte IPs',
-	
 	'UI:IPDiscovery:Action:New:UUIDCollision' => 'L\'attribut UUIDs doit être unique !',
-	'UI:IPDiscovery:Action:New:ScanWithNoPort' => 'Un numéro de port doit être spécifié quand la fonction de Scan est mise en oeuvre !'
+	'UI:IPDiscovery:Action:New:ScanWithNoPort' => 'Un numéro de port doit être spécifié quand la fonction de Scan est mise en oeuvre !',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv4Subnet' => 'Converti le FQDN des IPs découvertes',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv6Subnet' => 'Converti le FQDN des IPs découvertes',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv4Range' => 'Converti le FQDN des IPs découvertes',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPv6Range' => 'Converti le FQDN des IPs découvertes',
+	'UI:IPDiscovery:Action:ExplodeFQDN:IPAddress' => 'Converti le FQDN découvert',
 ));

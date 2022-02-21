@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3">
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.7">
   <classes>
     <class id="IPDiscovery" _delta="define">
       <parent>IPApplication</parent>
@@ -18,7 +18,7 @@
             <attribute id="org_id"/>
           </attributes>
         </reconciliation>
-        <icon>asset/img/binoculars.png</icon>
+        <icon>asset/img/binoculars2.png</icon>
       </properties>
       <fields>
         <field id="last_discovery_date" xsi:type="AttributeDateTime">
@@ -32,6 +32,17 @@
           <default_value/>
           <is_null_allowed>true</is_null_allowed>
           <tracking_level>none</tracking_level>
+        </field>
+        <field id="dhcp_range_discovery_enabled" xsi:type="AttributeEnum" _delta="define">
+          <sql>dhcp_range_discovery_enabled</sql>
+          <values>
+            <value id="yes">yes</value>
+            <value id="no">no</value>
+          </values>
+          <default_value>no</default_value>
+          <is_null_allowed>false</is_null_allowed>
+          <display_style>radio_horizontal</display_style>
+          <dependencies/>
         </field>
         <field id="ping_enabled" xsi:type="AttributeEnum">
           <sql>ping_enabled</sql>
@@ -81,12 +92,6 @@
           <display_style>radio_horizontal</display_style>
           <dependencies/>
         </field>
-        <field id="ipv4subnets_list" xsi:type="AttributeLinkedSet">
-          <linked_class>IPv4Subnet</linked_class>
-          <ext_key_to_me>ipdiscovery_id</ext_key_to_me>
-          <tracking_level/>
-          <edit_mode>add_only</edit_mode>
-         </field>
         <field id="port_number" xsi:type="AttributeInteger">
           <sql>port_number</sql>
           <default_value/>
@@ -118,6 +123,12 @@
           <display_style>radio_horizontal</display_style>
           <dependencies/>
         </field>
+        <field id="ipv4subnets_list" xsi:type="AttributeLinkedSet">
+          <linked_class>IPv4Subnet</linked_class>
+          <ext_key_to_me>ipdiscovery_id</ext_key_to_me>
+          <tracking_level/>
+          <edit_mode>add_only</edit_mode>
+         </field>
       </fields>
       <methods>
         <method id="DoCheckToWrite">
@@ -311,11 +322,14 @@
                 </item>
                 <item id="fieldset:Class:IPDiscovery:operation">
                   <items>
-                    <item id="last_discovery_date">
+                    <item id="dhcp_range_discovery_enabled">
                       <rank>10</rank>
                     </item>
-                    <item id="duration">
+                    <item id="last_discovery_date">
                       <rank>20</rank>
+                    </item>
+                    <item id="duration">
+                      <rank>30</rank>
                     </item>
                   </items>
                 </item>
@@ -399,6 +413,10 @@
           <extkey_attcode>ipdiscovery_id</extkey_attcode>
           <target_attcode>name</target_attcode>
         </field>
+        <field id="ipdiscovery_dhcp_range_discovery_enabled" xsi:type="AttributeExternalField" _delta="define">
+          <extkey_attcode>ipdiscovery_id</extkey_attcode>
+          <target_attcode>dhcp_range_discovery_enabled</target_attcode>
+        </field>
         <field id="ipdiscovery_ping_enabled" xsi:type="AttributeExternalField" _delta="define">
           <extkey_attcode>ipdiscovery_id</extkey_attcode>
           <target_attcode>ping_enabled</target_attcode>
@@ -417,6 +435,17 @@
         </field>
         <field id="ipdiscovery_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>ipdiscovery_enabled</sql>
+          <values>
+            <value id="yes">yes</value>
+            <value id="no">no</value>
+          </values>
+          <default_value>no</default_value>
+          <is_null_allowed>false</is_null_allowed>
+          <display_style>radio_horizontal</display_style>
+          <dependencies/>
+        </field>
+        <field id="dhcp_range_discovery_enabled" xsi:type="AttributeEnum" _delta="define">
+          <sql>dhcp_range_discovery_enabled</sql>
           <values>
             <value id="yes">yes</value>
             <value id="no">no</value>
@@ -513,6 +542,25 @@
           <tracking_level>none</tracking_level>
         </field>
       </fields>
+      <methods>
+        <method id="IsIPLookupEnabled" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>Overload-cmdbAbstractObject</type>
+          <code><![CDATA[ public function IsIPLookupEnabled()
+	{
+		$iIpDiscoveryId = $this->Get('ipdiscovery_id');
+		if (($iIpDiscoveryId > 0) &&
+		    ($this->Get('ipdiscovery_enabled') == 'yes') &&
+		    ($this->Get('ipdiscovery_iplookup_enabled') == 'yes') &&
+		    ($this->Get('iplookup_enabled') == 'yes')) {
+		    return true;
+	  }
+		return false;
+    }]]></code>
+        </method>
+      </methods>
       <presentation>
         <search _delta="must_exist">
           <items>
@@ -539,6 +587,21 @@
         </default_search>
       </presentation>
     </class>
+    <class id="IPv4Range" _created_in="teemip-ip-mgmt" _delta="must_exist">
+      <methods>
+        <method id="IsIPLookupEnabled" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>Overload-cmdbAbstractObject</type>
+          <code><![CDATA[ public function IsIPLookupEnabled()
+	{
+		$oSubnet = MetaModel::GetObject('IPv4Subnet', $this->Get('subnet_id'), false /* MustBeFound */);
+		return $oSubnet->IsIPLookupEnabled();
+    }]]></code>
+        </method>
+      </methods>
+    </class>
     <class id="IPv4Subnet" _created_in="teemip-ip-mgmt" _delta="must_exist">
       <presentation>
         <details _delta="must_exist">
@@ -550,17 +613,20 @@
                     <item id="ipdiscovery_id">
                       <rank>10</rank>
                     </item>
-                    <item id="ipdiscovery_ping_enabled">
+                    <item id="ipdiscovery_dhcp_range_discovery_enabled">
                       <rank>20</rank>
                     </item>
-                    <item id="ipdiscovery_iplookup_enabled">
+                    <item id="ipdiscovery_ping_enabled">
                       <rank>30</rank>
                     </item>
-                    <item id="ipdiscovery_scan_enabled">
+                    <item id="ipdiscovery_iplookup_enabled">
                       <rank>40</rank>
                     </item>
-                    <item id="ipdiscovery_scan_cnx_refused_enabled">
+                    <item id="ipdiscovery_scan_enabled">
                       <rank>50</rank>
+                    </item>
+                    <item id="ipdiscovery_scan_cnx_refused_enabled">
+                      <rank>60</rank>
                     </item>
                   </items>
                   <rank>10</rank>
@@ -570,17 +636,20 @@
                     <item id="ipdiscovery_enabled">
                       <rank>10</rank>
                     </item>
-                    <item id="ping_enabled">
+                    <item id="dhcp_range_discovery_enabled">
                       <rank>20</rank>
                     </item>
-                    <item id="iplookup_enabled">
+                    <item id="ping_enabled">
                       <rank>30</rank>
                     </item>
-                    <item id="scan_enabled">
+                    <item id="iplookup_enabled">
                       <rank>40</rank>
                     </item>
-                    <item id="scan_cnx_refused_enabled">
+                    <item id="scan_enabled">
                       <rank>50</rank>
+                    </item>
+                    <item id="scan_cnx_refused_enabled">
+                      <rank>60</rank>
                     </item>
                   </items>
                   <rank>20</rank>
@@ -689,7 +758,7 @@
           <display_style>list</display_style>
           <dependencies/>
         </field>
-         <field id="fqdn_from_iplookup" xsi:type="AttributeString" _delta="define">
+        <field id="fqdn_from_iplookup" xsi:type="AttributeString" _delta="define">
           <sql>fqdn_from_iplookup</sql>
           <default_value/>
           <is_null_allowed>true</is_null_allowed>
@@ -737,6 +806,19 @@
           <target_attcode>ipdiscovery_name</target_attcode>
         </field>
       </fields>
+      <methods>
+        <method id="IsIPLookupEnabled" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>Overload-cmdbAbstractObject</type>
+          <code><![CDATA[ public function IsIPLookupEnabled()
+	{
+		$oSubnet = MetaModel::GetObject('IPv4Subnet', $this->Get('subnet_id'), false /* MustBeFound */);
+		return $oSubnet->IsIPLookupEnabled();
+    }]]></code>
+        </method>
+      </methods>
       <presentation>
         <details _delta="must_exist">
           <items>
@@ -843,7 +925,7 @@
 		        <dashlet id="teemip-disc-302" xsi:type="DashletHeaderDynamic">
 		          <rank>1</rank>
 		          <title>Menu:IPDiscovery:IPv4Ping</title>
-		          <icon>teemip-ip-discovery/asset/img/ipmini-ping-xs.png</icon>
+		          <icon>teemip-ip-discovery/asset/img/ping-pong.png</icon>
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_ping = 'yes'</query>
 		          <group_by>status</group_by>
@@ -852,7 +934,7 @@
 		        <dashlet id="teemip-disc-303" xsi:type="DashletHeaderDynamic">
 		          <rank>2</rank>
 		          <title>Menu:IPDiscovery:IPv4Scan</title>
-		          <icon>teemip-ip-discovery/asset/img/ipmini-scan-xs.png</icon>
+		          <icon>teemip-ip-discovery/asset/img/vision.png</icon>
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_scan = 'yes'</query>
 		          <group_by>status</group_by>
@@ -861,7 +943,7 @@
 		        <dashlet id="teemip-disc-304" xsi:type="DashletHeaderDynamic">
 		          <rank>3</rank>
 		          <title>Menu:IPDiscovery:IPv4Lookup</title>
-		          <icon>teemip-ip-discovery/asset/img/ipmini-lookup-xs.png</icon>
+		          <icon>teemip-ip-discovery/asset/img/broadcasting.png</icon>
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_iplookup = 'yes'</query>
 		          <group_by>status</group_by>
@@ -903,32 +985,12 @@
 class TeemIpIPDiscovery implements iPopupMenuExtension
 {
 	/**
-	 * @param $oSubnet
-	 *
-	 * @return bool
-	 * @throws \ArchivedObjectException
-	 * @throws \CoreException
-	 */
-	private static function CheckIpsCanbeExpandedInSubnet($oSubnet) {
-		$iIpDiscoveryId = $oSubnet->Get('ipdiscovery_id');
-		if (($oSubnet->Get('ipdiscovery_enabled') == 'yes') && ($iIpDiscoveryId > 0) && ($oSubnet->Get('iplookup_enabled') == 'yes')) {
-			$oIpApplication = MetaModel::GetObject('IPDiscovery', $iIpDiscoveryId, false /* MustBeFound */);
-			if ($oIpApplication != null) {
-				if ($oIpApplication->Get('iplookup_enabled') == 'yes') {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * @inheritdoc
 	 */
 	public static function EnumItems($iMenuId, $param) {
 		$aResult = array();
 		switch ($iMenuId) {
-			case iPopupMenuExtension::MENU_OBJLIST_ACTIONS:    // $param is a DBObjectSet
+			case iPopupMenuExtension::MENU_OBJLIST_ACTIONS: // $param is a DBObjectSet
 				break;
 
 			case iPopupMenuExtension::MENU_OBJLIST_TOOLKIT: // $param is a DBObjectSet
@@ -937,71 +999,25 @@ class TeemIpIPDiscovery implements iPopupMenuExtension
 			case iPopupMenuExtension::MENU_OBJDETAILS_ACTIONS: // $param is a DBObject
 				$oObj = $param;
 
-				if ($oObj instanceof IPSubnet) {
+				if (($oObj instanceof IPv4Subnet) || ($oObj instanceof IPv4Range) || ($oObj instanceof IPv4Address)) {
 					// Additional actions for IPSubnets
-					$sClass = get_class($oObj);
-					if ((($sClass == 'IPv4Subnet') && (!UserRights::IsActionAllowed('IPv4Address', UR_ACTION_MODIFY) == UR_ALLOWED_YES))
-					    || (($sClass == 'IPv6Subnet') && (!UserRights::IsActionAllowed('IPv6Address', UR_ACTION_MODIFY) == UR_ALLOWED_YES))) {
+					if (!UserRights::IsActionAllowed('IPv4Address', UR_ACTION_MODIFY) == UR_ALLOWED_YES) {
 						break;
 					}
-					if (self::CheckIpsCanbeExpandedInSubnet($oObj)) {
+					if ($oObj->IsIPLookupEnabled() && ($oObj->DoCheckToExplodeFQDN('fqdn_from_iplookup') == '')) {
 						$oAppContext = new ApplicationContext();
 						$sContext = $oAppContext->GetForLink();
 
 						$id = $oObj->GetKey();
+						$sClass = get_class($oObj);
 
 						$aParams = $oAppContext->GetAsHash();
 						$aParams['class'] = $sClass;
 						$aParams['id'] = $id;
 						$aParams['operation'] = 'explodefqdn';
 						$aParams['fqdn_attribute'] = 'fqdn_from_iplookup';
-						$sMenu = 'UI:IPDiscovery:Action:ExplodeFQDN:IPSubnet';
+						$sMenu = 'UI:IPDiscovery:Action:ExplodeFQDN:IPAddress';
 						$aResult[] = new URLPopupMenuItem($sMenu, Dict::S($sMenu), utils::GetAbsoluteUrlModulePage('teemip-ip-mgmt', 'ui.teemip-ip-mgmt.php', $aParams));
-					}
-				} elseif ($oObj instanceof IPRange) {
-					// Additional actions for IPRange
-					$sClass = get_class($oObj);
-					if (($sClass == 'IPv4Range') && (!UserRights::IsActionAllowed('IPv4Address', UR_ACTION_MODIFY) == UR_ALLOWED_YES)) {
-						break;
-					} elseif (($sClass == 'IPv6range') && (!UserRights::IsActionAllowed('IPv6Address', UR_ACTION_MODIFY) == UR_ALLOWED_YES)) {
-						break;
-					}
-					$oSubnet = MetaModel::GetObject('IPSubnet', $oObj->Get('subnet_id'), false /* MustBeFound */);
-					if ($oSubnet != null) {
-						if (self::CheckIpsCanbeExpandedInSubnet($oSubnet)) {
-							$oAppContext = new ApplicationContext();
-							$sContext = $oAppContext->GetForLink();
-
-							$id = $oObj->GetKey();
-							$sClass = get_class($oObj);
-
-							$aParams = $oAppContext->GetAsHash();
-							$aParams['class'] = $sClass;
-							$aParams['id'] = $id;
-							$aParams['operation'] = 'explodefqdn';
-							$aParams['fqdn_attribute'] = 'fqdn_from_iplookup';
-							$sMenu = 'UI:IPDiscovery:Action:ExplodeFQDN:IPRange';
-							$aResult[] = new URLPopupMenuItem($sMenu, Dict::S($sMenu), utils::GetAbsoluteUrlModulePage('teemip-ip-mgmt', 'ui.teemip-ip-mgmt.php', $aParams));
-						}
-					}
-				} elseif ($oObj instanceof IPAddress) {
-					// Additional actions for IPAddress
-					$sFqdnFromLookup = $oObj->Get('fqdn_from_iplookup');
-					if (($sFqdnFromLookup != '') && (strcmp($sFqdnFromLookup, $oObj->Get('fqdn')) !== 0)) {
-					  // FQDN from lookup is not empty and different from already registered one
-						$sClass = get_class($oObj);
-						if (UserRights::IsActionAllowed($sClass, UR_ACTION_MODIFY) == UR_ALLOWED_YES) {
-							$oAppContext = new ApplicationContext();
-							$id = $oObj->GetKey();
-
-							$aParams = $oAppContext->GetAsHash();
-							$aParams['class'] = $sClass;
-							$aParams['id'] = $id;
-							$aParams['operation'] = 'explodefqdn';
-							$aParams['fqdn_attribute'] = 'fqdn_from_iplookup';
-							$sMenu = 'UI:IPDiscovery:Action:ExplodeFQDN:IPAddress';
-							$aResult[] = new URLPopupMenuItem($sMenu, Dict::S($sMenu), utils::GetAbsoluteUrlModulePage('teemip-ip-mgmt', 'ui.teemip-ip-mgmt.php', $aParams));
-						}
 					}
 				}
 				break;
