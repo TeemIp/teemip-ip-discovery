@@ -18,7 +18,7 @@
             <attribute id="org_id"/>
           </attributes>
         </reconciliation>
-        <icon>asset/img/binoculars2.png</icon>
+        <icon>asset/img/icons8-binoculars-48.png</icon>
       </properties>
       <fields>
         <field id="last_discovery_date" xsi:type="AttributeDateTime">
@@ -908,7 +908,7 @@
 		        <dashlet id="teemip-disc-104" xsi:type="DashletHeaderStatic">
 		          <rank>0</rank>
 		          <title>Menu:IPDiscovery:IPv4Statistics</title>
-		          <icon>teemip-ip-mgmt/asset/img/ipaddress.png</icon>
+		          <icon>teemip-ip-mgmt/asset/img/icons8-rj45-48.png</icon>
 		        </dashlet>
 		      </dashlets>
 		    </cell>
@@ -925,7 +925,7 @@
 		        <dashlet id="teemip-disc-302" xsi:type="DashletHeaderDynamic">
 		          <rank>1</rank>
 		          <title>Menu:IPDiscovery:IPv4Ping</title>
-		          <icon>teemip-ip-discovery/asset/img/ping-pong.png</icon>
+		          <icon>teemip-ip-discovery/asset/img/icons8-ping-pong-48.png</icon>
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_ping = 'yes'</query>
 		          <group_by>status</group_by>
@@ -934,7 +934,7 @@
 		        <dashlet id="teemip-disc-303" xsi:type="DashletHeaderDynamic">
 		          <rank>2</rank>
 		          <title>Menu:IPDiscovery:IPv4Scan</title>
-		          <icon>teemip-ip-discovery/asset/img/vision.png</icon>
+		          <icon>teemip-ip-discovery/asset/img/icons8-vision-48.png</icon>
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_scan = 'yes'</query>
 		          <group_by>status</group_by>
@@ -943,7 +943,7 @@
 		        <dashlet id="teemip-disc-304" xsi:type="DashletHeaderDynamic">
 		          <rank>3</rank>
 		          <title>Menu:IPDiscovery:IPv4Lookup</title>
-		          <icon>teemip-ip-discovery/asset/img/broadcasting.png</icon>
+		          <icon>teemip-ip-discovery/asset/img/icons8-broadcasting-48.png</icon>
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_iplookup = 'yes'</query>
 		          <group_by>status</group_by>
@@ -957,6 +957,7 @@
 		        <dashlet id="teemip-disc-501" xsi:type="DashletGroupByTable">
 		          <rank>0</rank>
 		          <title>Menu:IPDiscovery:IPv4DiscoveredSubnets</title>
+		          <icon>teemip-ip-mgmt/asset/img/icons8-subnet-48.png</icon>
 		          <query>SELECT IPv4Subnet WHERE ipdiscovery_id != 0</query>
 		          <group_by>ipdiscovery_id</group_by>
 		          <style>table</style>
