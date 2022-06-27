@@ -814,8 +814,12 @@
           <type>Overload-cmdbAbstractObject</type>
           <code><![CDATA[ public function IsIPLookupEnabled()
 	{
-		$oSubnet = MetaModel::GetObject('IPv4Subnet', $this->Get('subnet_id'), false /* MustBeFound */);
-		return $oSubnet->IsIPLookupEnabled();
+	  $iSubnetId = $this->Get('subnet_id');
+	  if ($iSubnetId > 0) {
+	      $oSubnet = MetaModel::GetObject('IPv4Subnet', $this->Get('subnet_id'), false /* MustBeFound */);
+	      return $oSubnet->IsIPLookupEnabled();
+	  }
+	  return false;
     }]]></code>
         </method>
       </methods>
