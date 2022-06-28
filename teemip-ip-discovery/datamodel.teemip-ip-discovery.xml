@@ -127,7 +127,7 @@
           <linked_class>IPv4Subnet</linked_class>
           <ext_key_to_me>ipdiscovery_id</ext_key_to_me>
           <tracking_level/>
-          <edit_mode>add_only</edit_mode>
+          <edit_mode>add_remove</edit_mode>
          </field>
       </fields>
       <methods>
