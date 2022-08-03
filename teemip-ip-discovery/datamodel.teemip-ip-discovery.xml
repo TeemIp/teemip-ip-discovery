@@ -158,16 +158,17 @@
           <type>Overload-cmdbAbstractObject</type>
           <code><![CDATA[ public function GetInitialStateAttributeFlags($sAttCode, &$aReasons = array())
 	{
+	  $sFlagsFromParent = parent::GetInitialStateAttributeFlags($sAttCode, $aReasons);
 		switch ($sAttCode)
 		{
 			case 'last_discovery_date':
 			case 'duration':
-				return OPT_ATT_READONLY;
+				return (OPT_ATT_READONLY | $sFlagsFromParent);
 
 			default:
 				break;
 		}
-		return parent::GetInitialStateAttributeFlags($sAttCode, $aReasons);
+		return $sFlagsFromParent;
     }]]></code>
         </method>
         <method id="GetAttributeFlags">
@@ -177,16 +178,17 @@
           <type>Overload-cmdbAbstractObject</type>
           <code><![CDATA[ public function GetAttributeFlags($sAttCode, &$aReasons = array(), $sTargetState = '')
 	{
+	  $sFlagsFromParent = parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState);
 		switch ($sAttCode)
 		{
 			case 'last_discovery_date':
 			case 'duration':
-				return OPT_ATT_READONLY;
+				return (OPT_ATT_READONLY | $sFlagsFromParent);
 
 			default:
 				break;
 		}
-		return parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState);
+		return $sFlagsFromParent;
     }]]></code>
         </method>
       </methods>
