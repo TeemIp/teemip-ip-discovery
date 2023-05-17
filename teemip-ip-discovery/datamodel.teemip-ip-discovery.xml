@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.7">
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0">
   <classes>
     <class id="IPDiscovery" _delta="define">
       <parent>IPApplication</parent>
@@ -36,8 +36,12 @@
         <field id="dhcp_range_discovery_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>dhcp_range_discovery_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -47,8 +51,12 @@
         <field id="ping_enabled" xsi:type="AttributeEnum">
           <sql>ping_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -63,8 +71,12 @@
         <field id="iplookup_enabled" xsi:type="AttributeEnum">
           <sql>iplookup_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -84,8 +96,12 @@
         <field id="scan_enabled" xsi:type="AttributeEnum">
           <sql>scan_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -99,9 +115,15 @@
         </field>
         <field id="protocol" xsi:type="AttributeEnum">
           <values>
-            <value>udp</value>
-            <value>tcp</value>
-            <value>both</value>
+            <value id="udp">
+              <code>udp</code>
+            </value>
+            <value id="tcp">
+              <code>tcp</code>
+            </value>
+            <value id="both">
+              <code>both</code>
+            </value>
           </values>
           <sql>protocol</sql>
           <default_value>udp</default_value>
@@ -115,8 +137,12 @@
         <field id="scan_cnx_refused_enabled" xsi:type="AttributeEnum">
           <sql>scan_cnx_refused_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -438,8 +464,12 @@
         <field id="ipdiscovery_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>ipdiscovery_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -449,8 +479,12 @@
         <field id="dhcp_range_discovery_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>dhcp_range_discovery_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -460,8 +494,12 @@
         <field id="ping_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>ping_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>yes</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -471,8 +509,12 @@
         <field id="iplookup_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>iplookup_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>yes</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -482,8 +524,12 @@
         <field id="scan_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>scan_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>yes</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -493,8 +539,12 @@
         <field id="scan_cnx_refused_enabled" xsi:type="AttributeEnum" _delta="define">
           <sql>scan_cnx_refused_enabled</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
           </values>
           <default_value>no</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -739,9 +789,15 @@
         <field id="responds_to_ping" xsi:type="AttributeEnum" _delta="define">
           <sql>responds_to_ping</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
-            <value id="na">na</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
+            <value id="na">
+              <code>na</code>
+            </value>
           </values>
           <default_value>na</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -751,9 +807,15 @@
         <field id="responds_to_iplookup" xsi:type="AttributeEnum" _delta="define">
           <sql>responds_to_iplookup</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
-            <value id="na">na</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
+            <value id="na">
+              <code>na</code>
+            </value>
           </values>
           <default_value>na</default_value>
           <is_null_allowed>false</is_null_allowed>
@@ -768,10 +830,18 @@
         <field id="responds_to_scan" xsi:type="AttributeEnum" _delta="define">
           <sql>responds_to_scan</sql>
           <values>
-            <value id="yes">yes</value>
-            <value id="no">no</value>
-            <value id="cnx_refused">cnx_refused</value>
-            <value id="na">na</value>
+            <value id="yes">
+              <code>yes</code>
+            </value>
+            <value id="no">
+              <code>no</code>
+            </value>
+            <value id="cnx_refused">
+              <code>cnx_refused</code>
+            </value>
+            <value id="na">
+              <code>na</code>
+            </value>
           </values>
           <default_value>na</default_value>
           <is_null_allowed>false</is_null_allowed>
