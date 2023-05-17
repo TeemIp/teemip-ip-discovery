@@ -18,7 +18,9 @@
             <attribute id="org_id"/>
           </attributes>
         </reconciliation>
-        <icon>asset/img/icons8-binoculars-48.png</icon>
+        <style>
+          <icon>asset/img/icons8-binoculars-48.png</icon>
+        </style>
       </properties>
       <fields>
         <field id="last_discovery_date" xsi:type="AttributeDateTime">
