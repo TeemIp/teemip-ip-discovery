@@ -11,6 +11,10 @@
           <attributes>
             <attribute id="name"/>
           </attributes>
+          <complementary_attributes>
+            <attribute id="location_name"></attribute>
+            <attribute id="uuid"></attribute>
+          </complementary_attributes>
         </naming>
         <reconciliation>
           <attributes>

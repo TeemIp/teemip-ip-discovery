@@ -17,6 +17,7 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Class:IPDiscovery' => 'IP Discovery Application',
 	'Class:IPDiscovery+' => '',
 	'Class:IPDiscovery/Name' => '%1$s',
+	'Class:IPDiscovery/ComplementaryName' => '%1$s - %2$s',
 	'Class:IPDiscovery/Attribute:last_discovery_date' => 'Last discovery date',
 	'Class:IPDiscovery/Attribute:last_discovery_date+' => 'Date when the discovery run last',
 	'Class:IPDiscovery/Attribute:duration' => 'Duration',
