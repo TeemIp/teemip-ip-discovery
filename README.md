@@ -1,4 +1,4 @@
-# <img src="https://wiki.teemip.net/lib/exe/fetch.php?media=extensions:icons8-binoculars-48.png"> TeemIp IP Discovery
+# <img src="https://wiki.teemip.net/lib/exe/fetch.php?media=extensions:picto_ipdiscoverydatamodel.png"> TeemIp IP Discovery
 
 TeemIp extension that enables IP discovery management
 
