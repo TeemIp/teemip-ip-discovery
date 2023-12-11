@@ -5,9 +5,9 @@
 	<author><![CDATA[Christophe Naud]]></author>
 	<label><![CDATA[TeemIp IP Discovery]]></label>
 	<description><![CDATA[TeemIp extension that enables IP discovery management]]></description>
-	<version>3.1.0</version>
-	<release_date>2023-06-21</release_date>
-	<version_description><![CDATA[Enhancements from 3.0.1: See Wiki at https://wiki.teemip.net/doku.php?id=extensions:teemip-zone-mgmt]]></version_description>
+	<version>3.1.1</version>
+	<release_date>2023-12-11</release_date>
+	<version_description><![CDATA[Enhancements from 3.1.0: See Wiki at https://wiki.teemip.net/doku.php?id=extensions:teemip-zone-mgmt]]></version_description>
 	<itop_version_min>3.0.0</itop_version_min>
 	<status>stable</status>
 	<mandatory>false</mandatory>
