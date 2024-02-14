@@ -433,6 +433,23 @@
         </details>
       </presentation>
     </class>
+    <class id="IPObject" _created_in="teemip-ip-mgmt" _delta="must_exist">
+      <fields>
+        <field id="status" xsi:type="AttributeEnum" _delta="must_exist">
+          <values>
+            <value id="discovered" _delta="define">
+              <code>discovered</code>
+              <rank>50</rank>
+              <style>
+                <main_color>hsla(29.65, 100%, 50%, 1)</main_color>
+                <complementary_color>hsla(0, 0%, 100%, 1)</complementary_color>
+                <decoration_classes/>
+              </style>
+            </value>
+          </values>
+        </field>
+      </fields>
+    </class>
     <class id="IPSubnet" _created_in="teemip-ip-mgmt" _delta="must_exist">
       <fields>
         <field id="ipdiscovery_id" xsi:type="AttributeExternalKey" _delta="define">

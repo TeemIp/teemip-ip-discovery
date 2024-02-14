@@ -64,6 +64,13 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Class:IPDiscovery:scaninfo' => 'Fonction Scan',
 ));
 
+// Class: IPObject
+
+Dict::Add('FR FR', 'French', 'Français', array(
+	'Class:IPObject/Attribute:status/Value:discovered' => 'Découvert(e)',
+	'Class:IPObject/Attribute:status/Value:discovered+' => '',
+));
+
 //
 // Class: IPSubnet
 //

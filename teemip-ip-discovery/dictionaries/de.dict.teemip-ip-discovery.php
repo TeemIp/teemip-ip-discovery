@@ -64,6 +64,13 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'Class:IPDiscovery:scaninfo' => 'Scan-Funktion',
 ));
 
+// Class: IPObject
+
+Dict::Add('DE DE', 'German', 'Deutsch', array(
+	'Class:IPObject/Attribute:status/Value:discovered' => 'Entdeckt',
+	'Class:IPObject/Attribute:status/Value:discovered+' => '',
+));
+
 //
 // Class: IPSubnet
 //
