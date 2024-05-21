@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0">
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1" load="strict">
   <classes>
     <class id="IPDiscovery" _delta="define">
       <parent>IPApplication</parent>
@@ -639,23 +639,23 @@
       <presentation>
         <search _delta="must_exist">
           <items>
-            <item id="ipdiscovery_id">
+            <item id="ipdiscovery_id" _delta="define">
               <rank>80</rank>
             </item>
-            <item id="ping_enabled">
+            <item id="ping_enabled" _delta="define">
               <rank>90</rank>
             </item>
-            <item id="iplookup_enabled">
+            <item id="iplookup_enabled" _delta="define">
               <rank>100</rank>
             </item>
-            <item id="scan_enabled">
+            <item id="scan_enabled" _delta="define">
               <rank>110</rank>
             </item>
           </items>
         </search>
         <default_search _delta="must_exist">
           <items>
-            <item id="ipdiscovery_id">
+            <item id="ipdiscovery_id" _delta="define">
               <rank>50</rank>
             </item>
           </items>
@@ -791,10 +791,10 @@
         </default_search>
         <list _delta="must_exist">
           <items>
-            <item id="ipdiscovery_id">
+            <item id="ipdiscovery_id" _delta="define">
               <rank>90</rank>
             </item>
-            <item id="ipdiscovery_enabled">
+            <item id="ipdiscovery_enabled" _delta="define">
               <rank>100</rank>
             </item>
           </items>
