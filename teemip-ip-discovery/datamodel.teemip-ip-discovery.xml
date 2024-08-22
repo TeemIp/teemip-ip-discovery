@@ -1028,7 +1028,7 @@
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_ping = 'yes'</query>
 		          <group_by>status</group_by>
-		          <values>allocated,released,reserved,unassigned</values>
+		          <values>allocated,released,reserved,unassigned,discovered</values>
 		        </dashlet>
 		        <dashlet id="teemip-disc-303" xsi:type="DashletHeaderDynamic">
 		          <rank>2</rank>
@@ -1037,7 +1037,7 @@
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_scan = 'yes'</query>
 		          <group_by>status</group_by>
-		          <values>allocated,released,reserved,unassigned</values>
+		          <values>allocated,released,reserved,unassigned,discovered</values>
 		        </dashlet>
 		        <dashlet id="teemip-disc-304" xsi:type="DashletHeaderDynamic">
 		          <rank>3</rank>
@@ -1046,7 +1046,7 @@
 		          <subtitle>By status</subtitle>
 		          <query>SELECT IPv4Address WHERE responds_to_iplookup = 'yes'</query>
 		          <group_by>status</group_by>
-		          <values>allocated,released,reserved,unassigned</values>
+		          <values>allocated,released,reserved,unassigned,discovered</values>
 		        </dashlet>
 		      </dashlets>
 		    </cell>
