@@ -1,12 +1,12 @@
 <?php
 /*
- * @copyright   Copyright (C) 2010-2024 TeemIp
+ * @copyright   Copyright (C) 2010-2025 TeemIp
  * @license     http://opensource.org/licenses/AGPL-3.0
  */
 
 SetupWebPage::AddModule(
 	__FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-	'teemip-ip-discovery/3.2.0',
+	'teemip-ip-discovery/3.2.1',
 	array(
 		// Identification
 		//
@@ -16,7 +16,7 @@ SetupWebPage::AddModule(
 		// Setup
 		//
 		'dependencies' => array(
-			'teemip-ip-mgmt/3.1.0',
+			'teemip-ip-mgmt/3.2.0',
 		),
 		'mandatory' => false,
 		'visible' => true,

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1" load="strict">
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1" load="strict"
+  xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/TeemIp/teemip-core-ip-mgmt/refs/heads/master/teemip-framework/doc/design.xsd">
   <classes>
     <class id="IPDiscovery" _delta="define">
       <parent>IPApplication</parent>
@@ -12,8 +13,8 @@
             <attribute id="name"/>
           </attributes>
           <complementary_attributes>
-            <attribute id="location_name"></attribute>
-            <attribute id="uuid"></attribute>
+            <attribute id="location_name"/>
+            <attribute id="uuid"/>
           </complementary_attributes>
         </naming>
         <reconciliation>
@@ -162,65 +163,55 @@
           <edit_mode>add_remove</edit_mode>
          </field>
       </fields>
+      <event_listeners>
+        <event_listener id="OnIPDiscoverySetinitialAttributesFlagsRequestedByIPDiscovery">
+          <event>EVENT_DB_SET_INITIAL_ATTRIBUTES_FLAGS</event>
+          <callback>OnIPDiscoverySetinitialAttributesFlagsRequestedByIPDiscovery</callback>
+          <rank>10</rank>
+        </event_listener>
+        <event_listener id="OnIPDiscoverySetAttributesFlagsRequestedByIPDiscovery">
+          <event>EVENT_DB_SET_ATTRIBUTES_FLAGS</event>
+          <callback>OnIPDiscoverySetAttributesFlagsRequestedByIPDiscovery</callback>
+          <rank>10</rank>
+        </event_listener>
+        <event_listener id="OnIPDiscoveryCheckToWriteRequestedByIPDiscovery">
+          <event>EVENT_DB_CHECK_TO_WRITE</event>
+          <callback>OnIPDiscoveryCheckToWriteRequestedByIPDiscovery</callback>
+          <rank>10</rank>
+        </event_listener>
+      </event_listeners>
       <methods>
-        <method id="DoCheckToWrite">
+        <method id="OnIPDiscoverySetInitialAttributesFlagsRequestedByIPDiscovery">
+          <static>false</static>
+          <access>public</access>
+          <type>EventListener</type>
+          <code><![CDATA[ public function OnIPDiscoverySetInitialAttributesFlagsRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData): void
+	{
+	    $this->AddInitialAttributeFlags('last_discovery_date', OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('duration', OPT_ATT_READONLY);
+    }]]></code>
+        </method>
+        <method id="OnIPDiscoverySetAttributesFlagsRequestedByIPDiscovery">
+          <static>false</static>
+          <access>public</access>
+          <type>EventListener</type>
+          <code><![CDATA[ public function OnIPDiscoverySetAttributesFlagsRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData): void
+	{
+	    $this->AddAttributeFlags('last_discovery_date', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('duration', OPT_ATT_READONLY);
+    }]]></code>
+        </method>
+        <method id="OnIPDiscoveryCheckToWriteRequestedByIPDiscovery">
           <comment/>
           <static>false</static>
           <access>public</access>
-          <type>Overload-cmdbAbstractObject</type>
-          <code><![CDATA[ public function DoCheckToWrite()
-	{
-		parent::DoCheckToWrite();
-
+          <type>EventListener</type>
+          <code><![CDATA[	public function OnIPDiscoveryCheckToWriteRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData): void
+    {
 		// If scan is enabled, make sure port number is not null
-		if ($this->Get('scan_enabled') == 'yes')
-		{
-			if ($this->Get('port_number') == '')
-			{
-				$this->m_aCheckIssues[] = Dict::Format('UI:IPDiscovery:Action:New:ScanWithNoPort');
-				return;
-			}
+		if (($this->Get('scan_enabled') == 'yes') && ($this->Get('port_number') == '')) {
+			$this->AddCheckIssue(Dict::S('UI:IPDiscovery:Action:New:ScanWithNoPort'));
 		}
-    }]]></code>
-        </method>
-        <method id="GetInitialStateAttributeFlags">
-          <comment/>
-          <static>false</static>
-          <access>public</access>
-          <type>Overload-cmdbAbstractObject</type>
-          <code><![CDATA[ public function GetInitialStateAttributeFlags($sAttCode, &$aReasons = array())
-	{
-	  $sFlagsFromParent = parent::GetInitialStateAttributeFlags($sAttCode, $aReasons);
-		switch ($sAttCode)
-		{
-			case 'last_discovery_date':
-			case 'duration':
-				return (OPT_ATT_READONLY | $sFlagsFromParent);
-
-			default:
-				break;
-		}
-		return $sFlagsFromParent;
-    }]]></code>
-        </method>
-        <method id="GetAttributeFlags">
-          <comment/>
-          <static>false</static>
-          <access>public</access>
-          <type>Overload-cmdbAbstractObject</type>
-          <code><![CDATA[ public function GetAttributeFlags($sAttCode, &$aReasons = array(), $sTargetState = '')
-	{
-	  $sFlagsFromParent = parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState);
-		switch ($sAttCode)
-		{
-			case 'last_discovery_date':
-			case 'duration':
-				return (OPT_ATT_READONLY | $sFlagsFromParent);
-
-			default:
-				break;
-		}
-		return $sFlagsFromParent;
     }]]></code>
         </method>
       </methods>
