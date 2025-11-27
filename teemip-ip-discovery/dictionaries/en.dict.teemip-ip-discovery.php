@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright   Copyright (C) 2021 TeemIp
+ * @copyright   Copyright (C) 2010-2025 TeemIp
  * @license     http://opensource.org/licenses/AGPL-3.0
  */
 
@@ -175,7 +175,8 @@ Dict::Add('EN US', 'English', 'English', array(
 //
 
 Dict::Add('EN US', 'English', 'English', array(
-	'Menu:IPDiscovery' => 'IP Discovery',
+	'Menu:IPDiscovery' => 'Discovery',
+    'Menu:IPDiscovery+' => 'Discovery applications',
 	'Menu:IPDiscoveryApplication' => 'IP Discovery Applications',
 	'Menu:IPDiscoveryApplication+' => 'All IP Discovery Applications',
 	'Menu:IPDiscovery:IPv4Statistics' => 'IPv4 Statistics',
