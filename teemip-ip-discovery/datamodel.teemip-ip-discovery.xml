@@ -608,7 +608,51 @@
           <tracking_level>none</tracking_level>
         </field>
       </fields>
+      <event_listeners>
+        <event_listener id="OnIPSubnetSetInitialAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <event>EVENT_DB_SET_INITIAL_ATTRIBUTES_FLAGS</event>
+          <callback>OnIPSubnetSetInitialAttributesFlagsRequestedByIPDiscovery</callback>
+          <rank>100</rank>
+        </event_listener>
+        <event_listener id="OnIPSubnetSetAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <event>EVENT_DB_SET_ATTRIBUTES_FLAGS</event>
+          <callback>OnIPSubnetSetAttributesFlagsRequestedByIPDiscovery</callback>
+          <rank>100</rank>
+        </event_listener>
+      </event_listeners>
       <methods>
+        <method id="OnIPSubnetSetInitialAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>EventListener</type>
+          <code><![CDATA[    public function OnIPSubnetSetInitialAttributesFlagsRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $this->AddInitialAttributeFlags('last_discovery_date', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('ping_duration', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('ping_discovered', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('iplookup_duration', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('iplookup_discovered', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('scan_duration', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('scan_discovered', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+    }]]></code>
+        </method>
+        <method id="OnIPSubnetSetAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>EventListener</type>
+          <code><![CDATA[    public function OnIPSubnetSetAttributesFlagsRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $this->AddAttributeFlags('last_discovery_date', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('ping_duration', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('ping_discovered', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('iplookup_duration', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('iplookup_discovered', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('scan_duration', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('scan_discovered', OPT_ATT_READONLY);
+    }]]></code>
+        </method>
         <method id="IsIPLookupEnabled" _delta="define">
           <comment/>
           <static>false</static>
@@ -863,6 +907,48 @@
           <dependencies/>
         </field>
       </fields>
+      <event_listeners>
+        <event_listener id="OnIPAddressSetInitialAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <event>EVENT_DB_SET_INITIAL_ATTRIBUTES_FLAGS</event>
+          <callback>OnIPAddressSetInitialAttributesFlagsRequestedByIPDiscovery</callback>
+          <rank>100</rank>
+        </event_listener>
+        <event_listener id="OnIPAddressSetAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <event>EVENT_DB_SET_ATTRIBUTES_FLAGS</event>
+          <callback>OnIPAddressSetAttributesFlagsRequestedByIPDiscovery</callback>
+          <rank>100</rank>
+        </event_listener>
+      </event_listeners>
+      <methods>
+        <method id="OnIPAddressSetInitialAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>EventListener</type>
+          <code><![CDATA[    public function OnIPAddressSetInitialAttributesFlagsRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $this->AddInitialAttributeFlags('last_discovery_date', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('responds_to_ping', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('responds_to_iplookup', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('fqdn_from_iplookup', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+        $this->AddInitialAttributeFlags('responds_to_scan', OPT_ATT_HIDDEN | OPT_ATT_READONLY);
+    }]]></code>
+        </method>
+        <method id="OnIPAddressSetAttributesFlagsRequestedByIPDiscovery" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>EventListener</type>
+          <code><![CDATA[    public function OnIPAddressSetAttributesFlagsRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $this->AddAttributeFlags('last_discovery_date', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('responds_to_ping', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('responds_to_iplookup', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('fqdn_from_iplookup', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('responds_to_scan', OPT_ATT_READONLY);
+    }]]></code>
+        </method>
+      </methods>
       <presentation>
         <search _delta="must_exist">
           <items>
