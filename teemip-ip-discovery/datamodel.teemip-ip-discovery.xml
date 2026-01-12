@@ -629,6 +629,11 @@
           <callback>OnIPSubnetSetAttributesFlagsRequestedByIPDiscovery</callback>
           <rank>100</rank>
         </event_listener>
+        <event_listener id="OnIPSubnetBeforeWriteRequestedByIPDiscovery" _delta="define">
+          <event>EVENT_DB_BEFORE_WRITE</event>
+          <callback>OnIPSubnetBeforeWriteRequestedByIPDiscovery</callback>
+          <rank>100</rank>
+        </event_listener>
       </event_listeners>
       <methods>
         <method id="OnIPSubnetSetInitialAttributesFlagsRequestedByIPDiscovery" _delta="define">
@@ -661,6 +666,24 @@
         $this->AddAttributeFlags('iplookup_discovered', OPT_ATT_READONLY);
         $this->AddAttributeFlags('scan_duration', OPT_ATT_READONLY);
         $this->AddAttributeFlags('scan_discovered', OPT_ATT_READONLY);
+    }]]></code>
+        </method>
+        <method id="OnIPSubnetBeforeWriteRequestedByIPDiscovery" _delta="define">
+          <comment/>
+          <static>false</static>
+          <access>public</access>
+          <type>EventListener</type>
+          <code><![CDATA[    public function OnIPSubnetBeforeWriteRequestedByIPDiscovery(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+		if ($this->Get('ipdiscovery_ping_enabled') == 'no') {
+			$this->Set('ping_enabled', 'no');
+		}
+		if ($this->Get('ipdiscovery_iplookup_enabled') == 'no') {
+			$this->Set('iplookup_enabled', 'no');
+		}
+		if ($this->Get('ipdiscovery_scan_enabled') == 'no') {
+			$this->Set('scan_enabled', 'no');
+		}
     }]]></code>
         </method>
         <method id="IsIPLookupEnabled" _delta="define">
