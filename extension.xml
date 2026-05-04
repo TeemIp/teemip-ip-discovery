@@ -6,7 +6,7 @@
 	<label><![CDATA[TeemIp IP Discovery]]></label>
 	<description><![CDATA[TeemIp extension that enables IP discovery management]]></description>
 	<version>3.2.2</version>
-	<release_date>2026-01-15</release_date>
+	<release_date>2026-05-04</release_date>
 	<version_description><![CDATA[Enhancements from 3.2.1: See Wiki at https://wiki.teemip.net/doku.php?id=extensions:teemip-zone-mgmt]]></version_description>
 	<itop_version_min>3.2.0</itop_version_min>
 	<status>stable</status>
